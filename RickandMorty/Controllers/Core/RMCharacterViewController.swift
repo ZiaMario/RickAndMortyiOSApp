@@ -16,6 +16,19 @@ final class RMCharacterViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Characters"
         
+        
+        let request = RMRequest(endPoint: .character)
+        
+        print("url = \(request.url)")
+        
+        RMService.shared.execute(request, expectation: RMCharacter.self) { result in
+            switch result {
+            case .success(let charResult):
+                print("result: \(charResult)")
+            case .failure(let error):
+                print("error: \(error.localizedDescription)")
+            }
+        }
     }
 
 }
